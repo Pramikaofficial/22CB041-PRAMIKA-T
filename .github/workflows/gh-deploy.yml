@@ -1,0 +1,25 @@
+name: hello world
+
+on: push
+
+jobs: 
+  deploy-react-app:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone the repository
+        uses: actions/checkout@v4
+
+      - name: Install npm packages
+        run: npm install
+
+      - name: Run npm build
+        run: npm run build
+
+      - name: Run npm tests
+        run: npm run test
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
